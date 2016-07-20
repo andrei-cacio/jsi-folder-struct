@@ -123,7 +123,20 @@ function filterFolder(obj) {
   return searchResult;
 }
 
+function searchingFor(){
+  var search = document.getElementById('search').value;
+  if(search)
+  {
+    document.getElementById('searchValue').innerHTML = 'Searching for : ' + search;
+  }
+  else
+  {
+    document.getElementById('searchValue').innerHTML = '';
+  }
+}
+
 function search() {
+  searchingFor();
   filterFolder(folders);
   var ul = to_ul(searchResult);
   document.getElementById('results').innerHTML = '';
