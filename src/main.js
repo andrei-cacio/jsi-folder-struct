@@ -92,4 +92,43 @@ function to_ul(obj) {
 
   return ul;
 }
- document.getElementById('results').appendChild(to_ul(folders));
+
+function filterFolder(obj) {
+
+  var search = document.getElementById('search').value;
+
+  for(var i in obj){
+
+    var file = obj[i];
+    var str = '';
+    str+= file.name;
+
+    if(str.indexOf(search) > -1){
+
+      if(file.type == 'dir')
+      {
+        searchResult.push(file);
+      }
+      else if(file.type == 'file')
+      {
+        searchResult.push(file);
+      }
+    }
+    else if(file.children){
+      filterFolder(file.children)
+    }
+
+  }
+
+  return searchResult;
+}
+
+function search() {
+  filterFolder(folders);
+  var ul = to_ul(searchResult);
+  document.getElementById('results').innerHTML = '';
+  document.getElementById('results').appendChild(ul);
+  searchResult = [];
+}
+
+search();
